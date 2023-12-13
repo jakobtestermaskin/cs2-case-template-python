@@ -9,6 +9,14 @@ inputs:
   ZIP_FILE_PATH:
     description: "Path to the zipped file"
     required: true
+  STEP_NAME:
+    required: true
+  ARTIFACTS_BUCKET:
+    required: true
+  LAMBDA_NAME:
+    required: false
+    default: "default"
+    description: 'Name of the lambda function. For steps with several lambdas, its important to note the name. Otherwise, leave it blank as "default" is used'
 
 runs:
   using: "composite"
@@ -21,7 +29,5 @@ runs:
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: "eu-west-1"
-      run: echo ${{ steps.gruop-name.outputs.group-name }}
-      shell: bash
-    - run: ls ${{ inputs.ZIP_FILE_PATH }}
+      run: aws s3 cp ${{ inputs.ZIP_FILE_PATH }} s3://${{ inputs.ARTIFACTS_BUCKET }}/deployments/${{ steps.group-name.outputs.group-name }}/${{ inputs.STEP_NAME }}/${{ LAMBDA_NAME }}.zip
       shell: bash
