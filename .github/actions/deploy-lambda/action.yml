@@ -13,15 +13,12 @@ runs:
   using: "composite"
   steps:
     - name: "Get gruop id"
-      uses: ./.github/actions/get-group-number
-      id: group-number
+      uses: ./.github/actions/get-group-name
+      id: group-name
     - name: "Deploy zipped lambda"
       env:
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: "eu-west-1"
-        GROUP_ID: ${{ steps.group-number.outputs.group-number }}
-      run: echo $GROUP_ID
-      shell: bash
-    - run: echo ${{ steps.group-number.outputs.group-name }}
+      run: echo ${{ steps.gruop-name.outputs.group-name }}
       shell: bash

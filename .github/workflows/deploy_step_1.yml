@@ -13,8 +13,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/get-group-number
-        id: group-name
       - run: cd src/step1 && zip -r index.zip .
       - uses: ./.github/actions/deploy-lambda
         with:
