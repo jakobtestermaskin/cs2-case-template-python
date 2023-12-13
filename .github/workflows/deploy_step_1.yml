@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - step1/*
+      - .github/workflows
+      - .github/actions
     branches:
       - main
 
@@ -14,6 +16,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - uses: ./.github/actions/deploy-lambda.yml
       - run: cd src && zip -r index.zip .
       - name: Deploy source code
         env:
