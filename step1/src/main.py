@@ -2,7 +2,7 @@
 Ikke gjør endringer her
 """
 import json
-from config import get_config
+from src.config import get_config
 
 
 def handler(event, context):
