@@ -3,10 +3,11 @@ description: "Deploy lambda to AWS environment"
 
 inputs:
   AWS_ACCESS_KEY_ID:
-    description: ""
     required: true
   AWS_SECRET_ACCESS_KEY:
-    description: ""
+    required: true
+  ZIP_FILE_PATH:
+    description: "Path to the zipped file"
     required: true
 
 runs:
@@ -21,4 +22,6 @@ runs:
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: "eu-west-1"
       run: echo ${{ steps.gruop-name.outputs.group-name }}
+      shell: bash
+    - run: ls ${{ inputs.ZIP_FILE_PATH }}
       shell: bash
