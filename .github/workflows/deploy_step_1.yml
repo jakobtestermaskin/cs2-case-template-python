@@ -3,10 +3,6 @@ name: "Push new code to github"
 on:
   workflow_dispatch:
   push:
-    paths:
-      - step1/*
-      - .github/workflows/*
-      - .github/actions/*
     branches:
       - main
 
