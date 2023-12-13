@@ -1,6 +1,14 @@
 name: "Deploy lambda"
 description: "Deploy lambda to AWS environment"
 
+inputs:
+  AWS_ACCESS_KEY_ID:
+    description: ""
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    description: ""
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -9,8 +17,8 @@ runs:
       id: group-number
     - name: "Deploy zipped lambda"
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: "eu-west-1"
         GROUP_ID: ${{ steps.group-number.outputs.group-number }}
       run: echo $GROUP_ID
