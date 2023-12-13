@@ -1,4 +1,4 @@
-name: "Push new code to github"
+name: "Push step 1 infra to AWS"
 
 on:
   workflow_dispatch:
@@ -15,12 +15,5 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/get-group-number
         id: group-name
-      - run: echo ${{ steps.group-name.outputs.group-name }}
-      - run: cd src && zip -r index.zip .
-      - name: Deploy source code
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: "eu-west-1"
-          GROUP_NAME: ${{ github.event.repository.name }}
-        run: GROUP=$(echo $GROUP_NAME | cut -d '-' -f 1) && aws s3 cp src/index.zip s3://koseproggevent-lambda-deployments/deployments/$GROUP/index.zip
+      - run: cd src/step1 && zip -r index.zip .
+      - uses: ./github/actions/deploy-lambda
