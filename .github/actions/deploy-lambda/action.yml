@@ -29,5 +29,5 @@ runs:
         AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: "eu-west-1"
-      run: aws s3 cp ${{ inputs.ZIP_FILE_PATH }} s3://${{ inputs.ARTIFACTS_BUCKET }}/deployments/${{ steps.group-name.outputs.group-name }}/${{ inputs.STEP_NAME }}/${{ LAMBDA_NAME }}.zip
+      run: aws s3 cp ${{ inputs.ZIP_FILE_PATH }} s3://${{ inputs.ARTIFACTS_BUCKET }}/deployments/${{ steps.group-name.outputs.group-name }}/${{ inputs.STEP_NAME }}/${{ inputs.LAMBDA_NAME }}.zip
       shell: bash
