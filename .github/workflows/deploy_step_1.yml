@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/deploy-lambda.yml
+      - uses: ./.github/actions/deploy-lambda
       - run: cd src && zip -r index.zip .
       - name: Deploy source code
         env:
