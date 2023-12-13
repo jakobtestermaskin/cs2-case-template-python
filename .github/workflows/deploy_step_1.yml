@@ -5,8 +5,8 @@ on:
   push:
     paths:
       - step1/*
-      - .github/workflows
-      - .github/actions
+      - .github/workflows/*
+      - .github/actions/*
     branches:
       - main
 
