@@ -24,3 +24,4 @@ runs:
       run: echo $GROUP_ID
       shell: bash
     - run: echo ${{ steps.group-number.outputs.group-name }}
+      shell: bash
