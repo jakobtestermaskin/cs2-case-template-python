@@ -14,6 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/get-group-number
+        id: group-name
+      - run: echo ${{ steps.group-name.outputs.group-name }}
       - run: cd src && zip -r index.zip .
       - name: Deploy source code
         env:

@@ -1,10 +1,15 @@
 name: "Get group number"
 description: "Get group number based on repository name"
+outputs:
+  group-name:
+    value: ${{ steps.group-name.outputs.groupname }}
+
 runs:
   using: "composite"
   steps:
     - name: "Get group number"
+      id: group-name
       env:
         GROUP_NAME: ${{ github.event.repository.name }}
-      run: GROUP=$(echo $GROUP_NAME | cut -d '-' -f 1) && echo $GROUP_NAME && echo $GROUP
+      run: GROUP=$(echo $GROUP_NAME | cut -d '-' -f 4) echo "groupname=$GROUP" >> $GITHUB_OUTPUT
       shell: bash
