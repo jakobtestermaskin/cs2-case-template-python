@@ -13,6 +13,3 @@ runs:
         GROUP_NAME: ${{ github.event.repository.name }}
       run: echo "groupname=$(echo $GROUP_NAME | cut -d '-' -f 4)" >> $GITHUB_OUTPUT
       shell: bash
-
-    - run: echo ${{ steps.group-name.outputs.groupname }}
-      shell: bash
