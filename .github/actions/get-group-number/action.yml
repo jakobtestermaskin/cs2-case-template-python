@@ -11,7 +11,7 @@ runs:
       id: group-name
       env:
         GROUP_NAME: ${{ github.event.repository.name }}
-      run: GROUP=$(echo $GROUP_NAME | cut -d '-' -f 4) echo "groupname=$GROUP" >> $GITHUB_OUTPUT
+      run: echo "groupname=$(echo $GROUP_NAME | cut -d '-' -f 4)" >> $GITHUB_OUTPUT
       shell: bash
 
     - run: echo ${{ steps.group-name.outputs.groupname }}
