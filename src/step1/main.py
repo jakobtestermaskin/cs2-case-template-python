@@ -9,7 +9,7 @@ def handler(event, context):
 
     records = event['Records']
 
-    radio_messages = [x['SNS']['Message'] for x in event['Records']]
+    radio_messages = [x['Sns']['Message'] for x in event['Records']]
 
     print(radio_messages)
 
