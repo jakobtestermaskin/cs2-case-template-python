@@ -16,6 +16,9 @@ def handler(event, context):
     events_from_radio_messages = [json.loads(x)['events']
                                   for x in radio_messages]
 
-    print(events_from_radio_messages)
+    flattened_events = [
+        item for row in events_from_radio_messages for item in row]
+
+    print(flattened_events)
 
     return {"statusCode": 200}
