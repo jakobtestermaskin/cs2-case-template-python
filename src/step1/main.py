@@ -11,8 +11,10 @@ def handler(event, context):
 
     radio_messages = [x['Sns']['Message'] for x in event['Records']]
 
-    events_from_radio_messages = [x['events']
-                                  for x in json.loads(radio_messages)]
+    print(radio_messages)
+
+    events_from_radio_messages = [json.loads(x)['events']
+                                  for x in radio_messages]
 
     print(events_from_radio_messages)
 
