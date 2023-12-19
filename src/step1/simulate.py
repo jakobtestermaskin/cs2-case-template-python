@@ -3,7 +3,7 @@ from db.client import KeyValueClientMock
 from db.keyValueStore import KeyValueStore
 
 
-fake_data = [
+fake_data = [[
     {
         "id": "1",
         "text": "Start",
@@ -17,12 +17,16 @@ fake_data = [
         "type": "hint",
         "song_name": None,
     },
+],
+    [
     {
         "id": "3",
         "text": "But I've never felt this way for no one, oh",
         "type": "song",
         "song_name": "drivers license",
     },
+],
+    [
     {
         "id": "5",
         "text": "I guess you didn't mean what you wrote in that song about me",
@@ -46,11 +50,18 @@ fake_data = [
         "type": "song",
         "song_name": "1 step forward 3 steps back"
     }
-]
+]]
 
 
 def simulate():
-    handle(fake_data, store=KeyValueStore(KeyValueClientMock()))
+    from time import sleep
+    for data in fake_data:
+        handle(data, store=KeyValueStore(KeyValueClientMock()))
+
+        print("Sleeping for 1 second before calling with next data")
+        sleep(1)
+
+    print("Finished simulating")
 
 
 if __name__ == "__main__":
