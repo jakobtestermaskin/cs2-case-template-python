@@ -1,24 +1,32 @@
 """
 Ikke gjør endringer her
 """
+
+from radio import handle
+
 import json
+
+from publish import publish_hint
 
 
 def handler(event, context):
-    print("Handler was ran for g00")
 
-    records = event['Records']
+    print(event)
 
-    radio_messages = [x['Sns']['Message'] for x in event['Records']]
+    # print("Handler was ran for g00")
 
-    print(radio_messages)
+    # records = event['Records']
 
-    events_from_radio_messages = [json.loads(x)['events']
-                                  for x in radio_messages]
+    # radio_messages = [x['Sns']['Message'] for x in event['Records']]
 
-    flattened_events = [
-        item for row in events_from_radio_messages for item in row]
+    # print(radio_messages)
 
-    print(flattened_events)
+    # events_from_radio_messages = [json.loads(x)['events']
+    #                               for x in radio_messages]
 
-    return {"statusCode": 200}
+    # flattened_events = [
+    #     item for row in events_from_radio_messages for item in row]
+
+    # handle(flattened_events, publish_client=publish_hint)
+
+    # return {"statusCode": 200}
