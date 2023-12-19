@@ -6,9 +6,9 @@ from db.keyValueStore import KeyValueStore
 
 def handle(events, store: KeyValueStore, publish_client=publish_hint_mock):
 
-    key_value_store = store.get()
+    # key_value_store = store.get()
 
-    print(key_value_store)
+    # print(key_value_store)
 
     for event in events:
         if (event['type'] == "hint"):
