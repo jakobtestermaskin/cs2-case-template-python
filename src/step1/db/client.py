@@ -14,7 +14,7 @@ table_name = os.environ.get("DYNAMO_DB_TABLE_NAME",
                             )
 
 
-class KeyValueStore(ABC):
+class KeyValueStoreClient(ABC):
     @abstractmethod
     def get_key_value_store():
         pass
@@ -24,7 +24,7 @@ class KeyValueStore(ABC):
         pass
 
 
-class KeyValueStoreImpl(KeyValueStore):
+class KeyValueStoreClientImpl(KeyValueStoreClient):
 
     def get_key_value_store(self):
 
@@ -88,7 +88,7 @@ def get_or_create_file(directory, key):
             return json.load(f)
 
 
-class KeyValueMock(KeyValueStore):
+class KeyValueClientMock(KeyValueStoreClient):
 
     def get_key_value_store(self):
         return get_or_create_file(directory=directory, key=key)
@@ -102,7 +102,7 @@ class KeyValueMock(KeyValueStore):
 
 if __name__ == '__main__':
 
-    storage = KeyValueStoreImpl()
+    storage = KeyValueStoreClientImpl()
 
     storage.store_key_value_store({"data": "exists"})
 

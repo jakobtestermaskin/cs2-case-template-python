@@ -1,4 +1,6 @@
 from radio import handle
+from db.client import KeyValueClientMock
+from db.keyValueStore import KeyValueStore
 
 
 fake_data = [
@@ -48,7 +50,7 @@ fake_data = [
 
 
 def simulate():
-    handle(fake_data)
+    handle(fake_data, store=KeyValueStore(KeyValueClientMock()))
 
 
 if __name__ == "__main__":
