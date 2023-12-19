@@ -7,11 +7,12 @@ from radio import handle
 import json
 
 from publish import publish_hint
+from db.impl import KeyValueStoreImpl
 
 
 def handler(event, context):
 
-    print(event)
+    KeyValueStoreImpl().store_key_value_store({"data_from": "lambda"})
 
     # print("Handler was ran for g00")
 
@@ -27,6 +28,6 @@ def handler(event, context):
     # flattened_events = [
     #     item for row in events_from_radio_messages for item in row]
 
-    # handle(flattened_events, publish_client=publish_hint)
+    # handle(flattened_events, publish_client=publish_hint, key_value_store=KeyValueStoreImpl)
 
     # return {"statusCode": 200}

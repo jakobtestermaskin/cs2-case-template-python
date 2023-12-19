@@ -2,8 +2,12 @@
 
 from publish import publish_hint_mock
 
+from db.impl import KeyValueMock
 
-def handle(events, publish_client=publish_hint_mock):
+
+def handle(events, publish_client=publish_hint_mock, key_value_store=KeyValueMock):
+
+    store = key_value_store()
 
     for event in events:
         if (event['type'] == "hint"):
