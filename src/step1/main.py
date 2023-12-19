@@ -28,6 +28,6 @@ def handler(event, context):
         item for row in events_from_radio_messages for item in row]
 
     handle(flattened_events, publish_client=publish_hint,
-           store=KeyValueStore(KeyValueStoreClientImpl))
+           store=KeyValueStore(KeyValueStoreClientImpl()))
 
     return {"statusCode": 200}
