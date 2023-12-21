@@ -13,7 +13,7 @@ def publish_hint(id: str, text: str):
 
     sns = boto3.client("sns")
 
-    topic_arn = os.env.get("RESULTS_TOPIC_ARN")
+    topic_arn = os.environ.get("RESULTS_TOPIC_ARN")
 
     result = sns.publish(
         TopicArn=topic_arn, Message=json.dumps({"type": "hint", "id": id, "text": text}), MessageStructure="string",
@@ -28,7 +28,8 @@ def _song_publishment(type: str, song_name: str):
 
     sns = boto3.client("sns")
 
-    topic_arn = os.env.get("RESULTS_TOPIC_ARN")
+    topic_arn = os.environ.get("RESULTS_TOPIC_ARN")
+    print(topic_arn)
 
     result = sns.publish(
         TopicArn=topic_arn, Message=json.dumps({"type": type, "song_name": song_name, "timestamp": datetime.datetime.utcnow().isoformat()}), MessageStructure="string",
