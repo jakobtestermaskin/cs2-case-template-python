@@ -37,6 +37,8 @@ class PublisherClient:
             TopicArn=topic_arn, Message=json.dumps({"type": type, "song_name": song_name, "timestamp": datetime.datetime.utcnow().isoformat(), "groupNumber": config['groupNumber']}), MessageStructure="string",
         )
 
+        print(result)
+
     def publish_song_started(self, song_name: str):
         self._song_publishment("song_started", song_name)
 
