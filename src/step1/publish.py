@@ -7,7 +7,7 @@ except:
 try:
     from config import config
 except:
-    config = {"groupNumber": "local"}
+    config = {"groupNumber": "g00"}
 
 import datetime
 import json
@@ -33,8 +33,11 @@ class PublisherClient:
         topic_arn = os.environ.get("RESULTS_TOPIC_ARN")
         print(topic_arn)
 
+        message = json.dumps({"type": type, "song_name": song_name, "timestamp": datetime.datetime.utcnow(
+        ).isoformat(), "groupNumber": config['groupNumber']})
+
         result = sns.publish(
-            TopicArn=topic_arn, Message=json.dumps({"type": type, "song_name": song_name, "timestamp": datetime.datetime.utcnow().isoformat(), "groupNumber": config['groupNumber']}), MessageStructure="string",
+            TopicArn=topic_arn, Message=message, MessageStructure="string",
         )
 
         print(result)
