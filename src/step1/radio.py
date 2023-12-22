@@ -1,10 +1,10 @@
 
 
-from publish import publish_hint_mock, publish_song_started, publish_song_ended
+from publish import Publisher
 from db.keyValueStore import KeyValueStore
 
 
-def handle(events, store: KeyValueStore, publish_client=publish_hint_mock):
+def handle(events, store: KeyValueStore, publisher: Publisher):
 
     key_value_store = store.get()
 
@@ -24,10 +24,10 @@ def handle(events, store: KeyValueStore, publish_client=publish_hint_mock):
         if (last_seen_song != current_event['song_name']):  # shift in song
 
             def start(name):
-                publish_song_started(name)
+                publisher.publish_song_started(name)
 
             def end(name):
-                publish_song_ended(name)
+                publisher.publish_song_ended(name)
 
             # En sang begynner rett etter hint
             if (current_event['song_name'] and last_seen_song == None):

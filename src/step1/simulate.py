@@ -1,6 +1,7 @@
 from radio import handle
 from db.client import KeyValueClientMock
 from db.keyValueStore import KeyValueStore
+from publish import Publisher, PublisherClientMock
 
 
 class bcolors:
@@ -75,7 +76,8 @@ def simulate():
     from time import sleep
     for data in fake_data:
         print(f"{bcolors.OKGREEN}Calling handle:{bcolors.ENDC}")
-        handle(data, store=KeyValueStore(KeyValueClientMock()))
+        handle(data, store=KeyValueStore(KeyValueClientMock()),
+               publisher=Publisher(PublisherClientMock()))
 
         print(
             f"\n{bcolors.OKCYAN}Sleeping for 1 second before calling with next data{bcolors.ENDC}\n")

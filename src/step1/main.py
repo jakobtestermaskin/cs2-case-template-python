@@ -6,7 +6,7 @@ from radio import handle
 
 import json
 
-from publish import publish_hint
+from publish import Publisher, PublisherClient
 from db.client import KeyValueStoreClientImpl
 from db.keyValueStore import KeyValueStore
 
@@ -27,7 +27,7 @@ def handler(event, context):
     flattened_events = [
         item for row in events_from_radio_messages for item in row]
 
-    handle(flattened_events, publish_client=publish_hint,
-           store=KeyValueStore(KeyValueStoreClientImpl()))
+    handle(flattened_events,
+           store=KeyValueStore(KeyValueStoreClientImpl()), publisher=Publisher(PublisherClient()))
 
     return {"statusCode": 200}
