@@ -1,4 +1,4 @@
-name: "Push step 1 infra to AWS"
+name: "Push step 2 infra to AWS"
 
 on:
   workflow_dispatch:
