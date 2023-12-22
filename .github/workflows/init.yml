@@ -25,7 +25,7 @@ jobs:
           GROUP_NAME: ${{ github.event.repository.name }}
         run: |
           sed -i "s/<name-prefix>/$NAME_PREFIX/g" README.md
-          sed -i "s,<group-number>,$${{ steps.group-name.outputs.group-name }},g" src/config.py
+          sed -i "s,<group-number>,${{ steps.group-name.outputs.group-name }},g" src/config.py
           rm .github/workflows/init.yml
       - name: Push
         run: |
