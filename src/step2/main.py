@@ -1,10 +1,10 @@
 import json
+from step2_handler import handle
 
 
 def handler(event, context):
-    print(event)
+    handle()
 
-    records = event['Records']
-    body = json.loads(records['body'])
 
-    print(body)
+if __name__ == '__main__':
+    handler({}, {})
