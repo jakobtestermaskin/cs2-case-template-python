@@ -1,5 +1,5 @@
 
 
 config = {
-    "groupNumber": "<group-number>"
+    "groupNumber": "g00"
 }
