@@ -4,16 +4,47 @@
 
 Se (TJS: fikser dere link?) debugging for informasjon om hvordan jobbe med prosjektet.
 
-Velkommen til CS 2 caseoppgaven!!
+Velkommen til CS 2 caseoppgave!
 
-Dette blir dritkul!
+I steg 1, 2 og 3 skal dere jobbe med CS Radio!
 
-I steg 1 og 2 skal dere jobbe med CS RADIO!
+CS radio er vår helt egne radiokanal for å dispatche meldinger.
+Foreløbig må vi betale en flat sum til hver artist vi featurer på radiokanalen vår, ettersom vi mangler funksjonalitet for å betale artistene for hver gang en låt spilles. Vi ønsker oss en løsning som kan registrere når låter starter og slutter, så vi kan spare penger
 
-Vår helt egne radiokanal for å dispatche meldinger.
-Dessverre har vi ikke implementert en funksjon for å betale artistene for hver gang de spilles. Dette betyr at vi må betale mye høyere satser for å spille hver artist.
+🥳Her kommer dere inn!🥳
 
-Derfor ønsker vi at dere lager funksjoner for å finne ut når sanger starter, når de slutter og deretter sende dette videre i steg 1. Bruk filen "radio.py" og ikke rør noe annet.
+## Oppgave 1
+
+1. Finn alle hint, og publiser de til tjenesten.
+2. Finn ut når låtene begynner, og publiser informasjonen til tjenesten.
+3. Finn ut når låtene slutter, og publiser informasjonen til tjenesten.
+
+### Utvikling
+All kode til oppgave 1 skrives i funksjonen handle(), i filen src/step1/radio.py
+
+`store` er en enkel keyValue-store dere kan benytte for å lagre verdier mellom kjøringer.
+
+`publisher` er publisheren dere skal benytte for å signalisere hendelser til systemet.
+
+`events` er dataen fra radiokanalen.
+
+Undersøk funksjonaliteten og metodene som nnn eksponerer, og løs oppgaven!
+
+### Ting å tenke på
+- Ikke installer pakker, da kræsjer systemet :^)
+- Bruk `datetime`-biblioteket, og `datetime.datetime.utcNow().isoFormat()` om du vil tracke tidspunkter(systemet gir 1 minutt slingringsmonn).
+- For å simulere systemet, kan du kjøre følgende kommando fra `src`: `python3 simulate.py`. Alt som printes i `handle()` vil da printes i konsollen.
+- Radioen går 24/7, så dere behøver ikke håndtere tilfeller hvor det ikke kommer mer data.
+
+
+### Tips
+- json.dumps(arg, indent=4) gjør ting mer lettleselig
+- Lag hjelpefunksjoner for å bryte opp koden
+- Sliter du med å få oversikt? Prøv å strukturere dataen, enten ved hjelp av klasser eller andre datastrukturer
+- Når en sang avslutter, kan det gå flere minutter med prat før neste sang begynner.
+
+
+## Oppgave 2
 
 Steg to blir kjørt hver gang steg 1 rapporterer at en sang er ferdig. I denne skal du bruke api-ene for å finne ut hvor mye en artist skal betales, og så gjennomføre denne betalingen.
 Her trenger du å jobbe med filen "step2_handler.py"

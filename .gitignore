@@ -5,3 +5,5 @@
 .storage/
 
 /**/**.logs.json
+
+.history/
