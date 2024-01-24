@@ -17,15 +17,34 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/get-group-name
         id: group-name
+      - name: Get access token
+        id: access-token
+        uses: ./.github/actions/get-access-token
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-west-1"
+          GROUP_NAME: ${{ steps.group-name.outputs.group-name }}
+      - name: Get events lambda function url
+        id: events-lambda-url
+        uses: ./.github/actions/get-functions-url
+        with:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: "eu-west-1"
+          FUNCTION_NAME: "cs2-case-st24-steps_logs_lambda"
       - name: Rename artifacts in repository
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: "eu-west-1"
-          GROUP_NAME: ${{ github.event.repository.name }}
+          GROUP_NAME: ${{ steps.group-name.outputs.group-name }}
         run: |
           sed -i "s/<name-prefix>/$NAME_PREFIX/g" README.md
+          sed -i "s,<group-number>,${{ steps.group-name.outputs.group-name }},g" README.md
           sed -i "s,<group-number>,${{ steps.group-name.outputs.group-name }},g" src/config.py
+          sed -i "s,<access-token>,${{ steps.access-token.outputs.access-token}},g" src/config.py
+          sed -i "s,<logs-function-url>,${{ steps.events-lambda-url.outputs.function-url}},g" src/config.py
           rm .github/workflows/init.yml
       - name: Push
         run: |

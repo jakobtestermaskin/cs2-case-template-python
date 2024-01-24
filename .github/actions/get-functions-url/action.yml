@@ -1,0 +1,27 @@
+name: "Functions url"
+description: "Get functions url from AWS"
+inputs:
+  FUNCTION_NAME:
+    required: true
+  AWS_ACCESS_KEY_ID:
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    required: true
+
+outputs:
+  function-url:
+    value: ${{ steps.function-url.outputs.function-url }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get function url
+      id: function-url
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: "eu-west-1"
+        FUNCTION_NAME: ${{ inputs.FUNCTION_NAME}}
+      run: |
+        echo "function-url=$(echo "$(aws lambda get-function-url-config --function-name $FUNCTION_NAME | jq -r '.FunctionUrl')" | sed 's:/*$::')" >> $GITHUB_OUTPUT
+      shell: bash

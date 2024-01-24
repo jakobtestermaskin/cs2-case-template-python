@@ -1,0 +1,28 @@
+name: "Get access token"
+description: "Get access token from DynamoDB"
+inputs:
+  GROUP_NAME:
+    description: "Group name"
+    required: true
+  AWS_ACCESS_KEY_ID:
+    required: true
+  AWS_SECRET_ACCESS_KEY:
+    required: true
+
+outputs:
+  access-token:
+    value: ${{ steps.access-token.outputs.access-token }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Get access token
+      id: access-token
+      env:
+        AWS_ACCESS_KEY_ID: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        AWS_DEFAULT_REGION: "eu-west-1"
+        GROUP_NAME: ${{ inputs.GROUP_NAME }}
+      run: |
+        echo "access-token=$(aws dynamodb get-item --table-name group_specific_setup_variables --key '{"group_name": {"S": "'$GROUP_NAME'"}}' | jq -r '.Item.access_token.S')" >> $GITHUB_OUTPUT
+      shell: bash

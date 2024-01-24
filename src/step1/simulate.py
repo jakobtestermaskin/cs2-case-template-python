@@ -38,20 +38,38 @@ fake_data = [[
         "type": "song",
         "song_name": "drivers license",
     },
+        {
+        "id": "3.1",
+        "text": "Enda en lyrics",
+        "type": "song",
+        "song_name": "drivers license",
+    },
+    {
+        "id": "3.2",
+        "text": "Siste",
+        "type": "song",
+        "song_name": "drivers license",
+    }
 ],
     [
+        {
+            "id": "4.1",
+            "text": "Siste",
+            "type": "song",
+            "song_name": "drivers license",
+        },
     {
         "id": "5",
         "text": "I guess you didn't mean what you wrote in that song about me",
         "type": "song",
         "song_name": "drivers license"
-    },
+        },
     {
         "id": "6",
         "text": "Enda ett",
         "type": "hint",
         "song_name": None,
-    },
+        },
     {
         "id": "7",
         "text": "'Cause it's always one step forward and three steps back",
@@ -62,13 +80,13 @@ fake_data = [[
         "text": "It's always one step forward and three steps back",
         "type": "song",
         "song_name": "1 step forward 3 steps back"
-    },
+        },
         {
         "id": "9",
         "text": "Enda ett siste",
         "type": "hint",
         "song_name": None,
-    }
+        }
 ]]
 
 
@@ -77,7 +95,7 @@ def simulate():
     for data in fake_data:
         print(f"{bcolors.OKGREEN}Calling handle:{bcolors.ENDC}")
         handle(data, store=KeyValueStore(KeyValueClientMock()),
-               publisher=Publisher(PublisherClient()))
+               publisher=Publisher(PublisherClientMock()))
 
         print(
             f"\n{bcolors.OKCYAN}Sleeping for 1 second before calling with next data{bcolors.ENDC}\n")

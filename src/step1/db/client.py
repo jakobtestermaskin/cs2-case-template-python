@@ -3,15 +3,18 @@ from abc import ABC, abstractmethod
 import json
 import os
 
+import uuid
+
 try:
     import boto3
     from boto3.dynamodb.types import TypeDeserializer, TypeSerializer
 except:
     pass
 
-table_name = os.environ.get("DYNAMO_DB_TABLE_NAME",
-                            "Cs2-step1-key-value-store-g00",
-                            )
+table_name = os.environ.get(
+    "DYNAMO_DB_TABLE_NAME",
+    "Cs2-step1-group-g00",
+)
 
 
 class KeyValueStoreClient(ABC):
@@ -25,41 +28,38 @@ class KeyValueStoreClient(ABC):
 
 
 class KeyValueStoreClientImpl(KeyValueStoreClient):
-
     def get_key_value_store(self):
-
         def dynamo_obj_to_python_obj(dynamo_obj: dict) -> dict:
             deserializer = TypeDeserializer()
-            return {
-                k: deserializer.deserialize(v)
-                for k, v in dynamo_obj.items()
-            }
+            return {k: deserializer.deserialize(v) for k, v in dynamo_obj.items()}
 
         client = boto3.client("dynamodb")
 
-        result = client.get_item(Key={
-            "type": {
-                "S": "key_value_store"
+        result = client.get_item(
+            Key={
+                "id": {"S": "key_value_store"},
+            },
+            TableName=table_name,
+        )
 
-            }}, TableName=table_name)
-
-        item = dynamo_obj_to_python_obj(result.get('Item', {}))
+        item = dynamo_obj_to_python_obj(result.get("Item", {}))
 
         if "type" in item:
-            del item['type']
+            del item["type"]
 
         return item.get("data", {})
 
     def store_key_value_store(self, data: dict):
-
         client = boto3.client("dynamodb")
 
-        result = client.put_item(TableName=table_name, Item={
-            "type": {
-                "S": "key_value_store"
+        result = client.put_item(
+            TableName=table_name,
+            Item={
+                "id": {"S": "key_value_store"},
+                "type": {"S": "key_value_store"},
+                "data": TypeSerializer().serialize(data),
             },
-            "data": TypeSerializer().serialize(data)
-        })
+        )
 
         return data
 
@@ -69,7 +69,7 @@ directory = ".storage"
 
 
 def take(path):
-    if (not os.path.exists(path)):
+    if not os.path.exists(path):
         os.makedirs(path)
 
 
@@ -78,7 +78,7 @@ def get_or_create_file(directory, key):
 
     file_path = f"{directory}/{key}"
 
-    if (not os.path.exists(file_path)):
+    if not os.path.exists(file_path):
         with open(file_path, "w") as f:
             f.write("{}")
         return {}
@@ -89,7 +89,6 @@ def get_or_create_file(directory, key):
 
 
 class KeyValueClientMock(KeyValueStoreClient):
-
     def get_key_value_store(self):
         return get_or_create_file(directory=directory, key=key)
 
@@ -100,8 +99,7 @@ class KeyValueClientMock(KeyValueStoreClient):
             json.dump(data, f, indent=4)
 
 
-if __name__ == '__main__':
-
+if __name__ == "__main__":
     storage = KeyValueStoreClientImpl()
 
     storage.store_key_value_store({"data": "exists"})
