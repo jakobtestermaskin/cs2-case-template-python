@@ -1,25 +1,42 @@
-# TODO: Rewrite README
+# CS2 Caseoppgave
 
-## Hvordan jobbe med stepsene?
+Velkommen til CS2 caseoppgave! :rocket:
 
-Se (TJS: fikser dere link?) debugging for informasjon om hvordan jobbe med prosjektet.
+Casen består av 4 steg, der de tre første omhandler CS Radio og det siste spillet Battleship.
 
-Velkommen til CS 2 caseoppgave!
+CS Radio er vår helt egne radiokanal for å dispatche meldinger.
+Foreløpig må vi betale en flat sum til hver artist vi featurer på radiokanalen vår, ettersom vi mangler funksjonalitet for å betale artistene for hver gang en låt spilles. Vi ønsker oss en løsning som kan registrere når låter starter og slutter, så vi kan spare penger. Det er her dere kommer inn, for å hjelpe oss med dette :partying_face:
 
-I steg 1, 2 og 3 skal dere jobbe med CS Radio!
+[TODO TSJ: litt info om tjenesten, hvilke filer de trenger å se på osv - typ litt av det Jakob kommer til å si før de begynner]
 
-CS radio er vår helt egne radiokanal for å dispatche meldinger.
-Foreløbig må vi betale en flat sum til hver artist vi featurer på radiokanalen vår, ettersom vi mangler funksjonalitet for å betale artistene for hver gang en låt spilles. Vi ønsker oss en løsning som kan registrere når låter starter og slutter, så vi kan spare penger
+## Oppgaver
 
-🥳Her kommer dere inn!🥳
+### Steg 1 [WIP]
 
-## Oppgave 1
+I steg 1 skal dere få innsikt i dataen fra radioen.
+Som i en vanlig radiosending spilles det sanger og prates mellom disse.
+For å se hvordan dataen fra radioen ser ut kan dere kjøre [simulate.py](src/step1/simulate.py) i terminalen, som simulerer en del av en radiosending.
 
-1. Finn alle hint, og publiser de til tjenesten.
-2. Finn ut når låtene begynner, og publiser informasjonen til tjenesten.
-3. Finn ut når låtene slutter, og publiser informasjonen til tjenesten.
+```bash
+python3 simulate.py
+```
 
-### Utvikling
+Dere kan da se at dataen kommer i python dictionaries.
+Vi vil at dere skal persistere denne dataen fra dictionaries til objekter.
+For å se om dere har gjort oppgaven riktig pusher dere koden til main-branchen og sjekker om testene passer i CI/CD-pipelinen [OBS: TSJ - WIP].
+
+- [WIP]: Vi må ha tester som sjekker at dette gjøres riktig. Kanskje en CI/CD-pipeline som sjekker om objektene er på riktig format?
+- [TODO]: link til filen de skal jobbe i når oppgaven er laget
+
+---
+
+### Steg 2
+
+I steg 2 skal dere finne ut når låtene begynner og slutter, samt plukke opp hint som kommer i praten mellom låtene.
+For å gjøre dette må dere interagere med dataen fra radioen.
+
+[Til TSJ: flytte noe av dette til tips-seksjon og heller skrive at de burde se på argumentene som passes til funksjonen?]
+
 All kode til oppgave 1 skrives i funksjonen handle(), i filen src/step1/radio.py
 
 `store` er en enkel keyValue-store dere kan benytte for å lagre verdier mellom kjøringer.
@@ -30,27 +47,44 @@ All kode til oppgave 1 skrives i funksjonen handle(), i filen src/step1/radio.py
 
 Undersøk funksjonaliteten og metodene som nnn eksponerer, og løs oppgaven!
 
-### Ting å tenke på
-- Ikke installer pakker, da kræsjer systemet :^)
-- Bruk `datetime`-biblioteket, og `datetime.datetime.utcNow().isoFormat()` om du vil tracke tidspunkter(systemet gir 1 minutt slingringsmonn).
+For å bli ferdig med oppgaven skal dere altså:
+
+1. Finne alle hint, og publisere de til tjenesten.
+2. Publisere låtnavnet til tjenesten når en låt begynner.
+3. Publisere låtnavnet til tjenesten når en låt er ferdigspilt.
+
+[Til TSJ: hadde vært veldig nice om vi kunne hatt disse tipsene i en collapsible eller om vi putter de i en egen readme]
+
+Tips:
+
+- For å finne ut om en melding fra radioen inneholder sang eller tale kan dere sjekke typen på dataen
+
+---
+
+### Steg 3 [WIP]
+
+Steg tre blir kjørt hver gang steg to rapporterer at en sang er ferdig. I denne skal du bruke api-ene for å finne ut hvor mye en artist skal betales, og så gjennomføre denne betalingen.
+Her trenger du å jobbe med filen [payment_service.py](src/step2/payment_service.py).
+
+---
+
+### Steg 4 - Battleship [WIP]
+
+[TODO]
+
+## Generelle tips
+
 - For å simulere systemet, kan du kjøre følgende kommando fra `src`: `python3 simulate.py`. Alt som printes i `handle()` vil da printes i konsollen.
+- [TODO: fjern om steg 1 om objekter blir implementert?] Sliter du med å få oversikt? Prøv å strukturere dataen, enten ved hjelp av klasser eller andre datastrukturer
+- Lag hjelpefunksjoner for å bryte opp koden
+- Når en sang avslutter, kan det gå flere minutter med prat før neste sang begynner.
 - Radioen går 24/7, så dere behøver ikke håndtere tilfeller hvor det ikke kommer mer data.
 
+### Utvikling
 
-### Tips
-- json.dumps(arg, indent=4) gjør ting mer lettleselig
-- Lag hjelpefunksjoner for å bryte opp koden
-- Sliter du med å få oversikt? Prøv å strukturere dataen, enten ved hjelp av klasser eller andre datastrukturer
-- Når en sang avslutter, kan det gå flere minutter med prat før neste sang begynner.
-
-
-## Oppgave 2
-
-Steg to blir kjørt hver gang steg 1 rapporterer at en sang er ferdig. I denne skal du bruke api-ene for å finne ut hvor mye en artist skal betales, og så gjennomføre denne betalingen.
-Her trenger du å jobbe med filen "step2_handler.py"
-
-OG TIL TSJ:
-Please! Gjør endringer i dette repoet!!
+- Ikke installer pakker, da kræsjer systemet :^)
+- `json.dumps(arg, indent=4)` gjør ting mer lettleselig under printing av radioen
+- Bruk `datetime`-biblioteket, og `datetime.datetime.utcNow().isoFormat()` om du vil tracke tidspunkter(systemet gir 1 minutt slingringsmonn).
 
 # Debugging
 
@@ -80,7 +114,7 @@ Her finner du log-gruppen for lambdaen din:
 
 ### Events
 
-Benytt scriptet (TJS: Link plz) get_events.py
+Benytt scriptet [get_events.py](src/get_events.py).
 
 Hvis du er stasjonert i src-mappen, kan du gjøre følgende:
 
