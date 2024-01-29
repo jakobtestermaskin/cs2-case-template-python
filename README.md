@@ -127,3 +127,11 @@ Du kan også velge om du ønsker song_ended events (song_ended), hint_evnets (hi
 ```bash
 python3 get_events.py song_ended
 ```
+
+# Virituelt miljø med Python
+
+Dersom du ønsker et virituelt miljø med python, kan du enkelt opprette et med `bash python3 -m venv venv`. Nødvendige pakker finner du local_development_requirements.txt.
+
+Aktiver miljøet med `bash source venv/bin/activate`, deretter installerer du pakker med `bash pip install -r local_development_requirements.txt`
+
+Evt: `bash python3 -m pip install -r local_development_requirements.py`, dersom du ikke har pip i path-en.

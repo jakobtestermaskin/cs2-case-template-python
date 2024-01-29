@@ -7,3 +7,5 @@
 /**/**.logs.json
 
 .history/
+
+/venv
