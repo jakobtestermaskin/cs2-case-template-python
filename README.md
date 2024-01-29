@@ -128,7 +128,11 @@ Du kan også velge om du ønsker song_ended events (song_ended), hint_evnets (hi
 python3 get_events.py song_ended
 ```
 
-# Virituelt miljø med Python
+# Battleship
+
+## Virituelt miljø med Python
+
+Merk: Vi anbefaler å kjøre i docker om man har muligheten til det. Da trenger man bare å kjøre: `bash docker compose up`.
 
 Dersom du ønsker et virituelt miljø med python, kan du enkelt opprette et med `bash python3 -m venv venv`. Nødvendige pakker finner du local_development_requirements.txt.
 
