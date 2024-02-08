@@ -15,7 +15,10 @@ def handler(event, context):
         song = body.get("song", "drivers license")
         artist = body.get("artist", "olivia rodrigo")
 
-        handle({"song": song, "artist": artist})
+        handle(
+            {"song": song, "artist": artist},
+            paymentAdapter=PaymentAdapter(PaymentAdapterImpl()),
+        )
 
 
 if __name__ == "__main__":
@@ -23,9 +26,9 @@ if __name__ == "__main__":
         {
             "Records": [
                 {
-                    "body": '{"song": "1 step forward 3 steps backwards","artist": "oliva rodrigo"}'
+                    "body": '{"song": "1 step forward 3 steps backwards","artist": "olivia rodrigo"}'
                 }
             ],
         },
-        paymentAdapter=PaymentAdapter(PaymentAdapterImpl()),
+        {},
     )
