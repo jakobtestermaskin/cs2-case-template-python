@@ -4,6 +4,7 @@ Ikke gjør endringer her
 
 import json
 from payment_service import handle
+from payment.adapter import PaymentAdapter, PaymentAdapterImpl
 
 
 def handler(event, context):
@@ -26,5 +27,5 @@ if __name__ == "__main__":
                 }
             ],
         },
-        {},
+        paymentAdapter=PaymentAdapter(PaymentAdapterImpl()),
     )
