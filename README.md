@@ -2,7 +2,7 @@
 
 Velkommen til CS2 caseoppgave! :rocket:
 
-Casen består av 4 deler, der de tre første omhandler CS Radio og den siste omhandler spillet Battleship.
+Casen består av to hoveddeler: CS Radio og spillet Battleship.
 
 ## CS Radio
 
@@ -11,11 +11,13 @@ Foreløpig må vi betale en flat sum til hver artist vi featurer på radiokanale
 Vi ønsker oss en løsning som kan registrere når låter starter og slutter, så vi kan spare penger. 
 Det er her dere kommer inn, for å hjelpe oss med dette :partying_face:
 
-[TODO TSJ: litt info om tjenesten, hvilke filer de trenger å se på osv - typ litt av det Jakob kommer til å si før de begynner]
+Koden dere skal jobbe med ligger i mappene `step1` og `step2`. 
+Det er bare å kikke rundt i mappene for å forstå hvilke funksjoner som finnes og som kan være til hjelp under løsingen av oppgavene.
+I tillegg ligger det noen generelle tips lengre ned i denne README-en, samt noen hint i egne README-er i hver av mappene.
 
 ### Steg 0 
 
-Før dere gyver løs på oppgavene anbefaler vi dere å få litt innsikt i dataen fra radioen.
+Til å begynne med anbefaler vi dere å få litt innsikt i dataen fra radioen.
 Som i en vanlig radiosending spilles det sanger og prates mellom disse.
 For å se hvordan dataen fra radioen ser ut kan dere kjøre [simulate.py](src/step1/simulate.py) i terminalen, som simulerer en del av en radiosending.
 
@@ -24,27 +26,23 @@ python3 simulate.py
 ```
 
 Dere kan da se at dataen kommer i python dictionaries.
-For å få en bedre innsikt i dataen kan dere for eksempel persistere dataen fra dictionaries til objekter. Dette er ikke noe dere er nødt til å gjøre, men kan være en fin intro til oppgavene.
-
----
+For å få en bedre innsikt i dataen kan dere for eksempel persistere dataen fra dictionaries til objekter. 
+Dette er ikke noe dere er nødt til å gjøre, men kan være en fin intro til oppgavene.
 
 For å løse de neste delene av CS Radio-oppgaven kan dere gå inn i README-ene til [step1](src/step1/README.md) og [step2](src/step2/README.md) for å lese oppgavebeskrivelsene. 
 
+
+## Battleship
+
 Når dere er ferdig med CS Radio-oppgaven kan dere lese oppgavebeskrivelsen for Battleship [her](src/battleship/README.md).
+
 
 # Generelle tips
 
-- For å simulere systemet, kan du kjøre følgende kommando fra `src`: `python3 simulate.py`. Alt som printes i `handle()` vil da printes i konsollen.
-- [TODO: fjern om steg 1 om objekter blir implementert?] Sliter du med å få oversikt? Prøv å strukturere dataen, enten ved hjelp av klasser eller andre datastrukturer
-- Lag hjelpefunksjoner for å bryte opp koden
-- Når en sang avslutter, kan det gå flere minutter med prat før neste sang begynner.
-- Radioen går 24/7, så dere behøver ikke håndtere tilfeller hvor det ikke kommer mer data.
-
-## Utvikling
-
 - Ikke installer pakker, da kræsjer systemet :^)
-- `json.dumps(arg, indent=4)` gjør ting mer lettleselig under printing av radioen
-- Bruk `datetime`-biblioteket, og `datetime.datetime.utcNow().isoFormat()` om du vil tracke tidspunkter(systemet gir 1 minutt slingringsmonn).
+- Lag hjelpefunksjoner for å bryte opp koden.
+- Det ligger en del funksjoner som kan være til hjelp i ulike filer. Bare å trykke seg rundt for å finne hjelpemidler!
+
 
 ## Debugging
 
