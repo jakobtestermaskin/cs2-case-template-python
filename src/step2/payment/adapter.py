@@ -32,7 +32,7 @@ class PaymentAdapterImpl:
 
         print(result)
 
-        print(f"Made payment: NOK {amount * 100} to {account_number}")
+        print(f"Made payment: NOK {amount} to {account_number}")
 
 
 class PaymentAdapterMock:
